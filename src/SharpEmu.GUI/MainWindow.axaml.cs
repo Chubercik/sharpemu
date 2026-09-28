@@ -357,31 +357,7 @@ public partial class MainWindow : Window
             SetEnvironmentToggle("SHARPEMU_LOG_NP", EnvLogNpToggle.IsChecked == true);
         CrashDumpToggle.IsCheckedChanged += (_, _) =>
             SetEnvironmentToggle("SHARPEMU_CRASH_CAPTURE", CrashDumpToggle.IsChecked == true);
-        DefaultProfileBox.TextChanged += (_, _) =>
-            _settings.DefaultProfile = GuiSettings.NormalizeDefaultProfile(DefaultProfileBox.Text);
-        LanguageBox.SelectionChanged += (_, _) => OnLanguageChanged();
-
-        GameList.AddHandler(ContextRequestedEvent, OnGameContextRequested, RoutingStrategies.Tunnel);
-        AddHandler(KeyDownEvent, OnPreviewKeyDown, RoutingStrategies.Tunnel);
-        CtxLaunch.Click += (_, _) => LaunchSelected();
-        CtxCopyPath.Click += async (_, _) =>
-            await CopyToClipboardAsync((GameList.SelectedItem as GameEntry)?.Path);
-        CtxCopyTitleId.Click += async (_, _) =>
-            await CopyToClipboardAsync((GameList.SelectedItem as GameEntry)?.TitleId);
-        CtxGameSettings.Click += (_, _) => OpenSelectedGameSettings();
-        CtxRemove.Click += (_, _) => RemoveSelectedFromLibrary();
-
-        Opened += async (_, _) => await OnOpenedAsync();
-        Closing += (_, _) => BeginWindowClosing();
-        Closed += (_, _) => CompleteWindowClosing();
-
-        SdlLauncherGamepad.EnsureStarted();
-        _gamepadTimer = new DispatcherTimer
-        {
-            Interval = TimeSpan.FromMilliseconds(50),
-        };
         EnvRenderDocToggle.IsCheckedChanged += (_, _) =>
-
             SetEnvironmentToggle(
                 "SHARPEMU_RENDERDOC",
                 EnvRenderDocToggle.IsChecked == true);

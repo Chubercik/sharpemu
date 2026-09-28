@@ -364,7 +364,6 @@ public partial class MainWindow : Window
         GameList.AddHandler(ContextRequestedEvent, OnGameContextRequested, RoutingStrategies.Tunnel);
         AddHandler(KeyDownEvent, OnPreviewKeyDown, RoutingStrategies.Tunnel);
         CtxLaunch.Click += (_, _) => LaunchSelected();
-        CtxOpenFolder.Click += (_, _) => OpenSelectedGameFolder();
         CtxCopyPath.Click += async (_, _) =>
             await CopyToClipboardAsync((GameList.SelectedItem as GameEntry)?.Path);
         CtxCopyTitleId.Click += async (_, _) =>
